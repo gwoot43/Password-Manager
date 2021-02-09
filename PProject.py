@@ -11,7 +11,7 @@ fkey = open ('file_key.txt', 'rb')
 key = fkey.read()
 cipher = Fernet(key)
 characters = 'abcdefghijkmnopqrstuvwyzABCDEFGHJKLMNPQRSTUVWYZ123456790@#$%&'
-email = 'andreasahn96@gmail.com'
+email = 'insert email here'
 #to enable OTP, must allow less secure apps https://myaccount.google.com/lesssecureapps
 
 def show_accounts () :
@@ -48,7 +48,7 @@ def authenticate () :
     # Log in to your gmail account
     smtp.login(email, "insertpassword")
     # remember to input the password ' ')
-    otp = random.randint(1000, 9999) #4 digit
+    otp = random.randint(1000, 9999) #generates a 4 digit number for OTP
     otp = str(otp)
         
     smtp.sendmail(email, email, otp)
@@ -148,7 +148,6 @@ def menu () :
       
 #Using the getpass module, hides the input of the password 
 def masterkey () :
-    
     pwd = getpass.getpass(prompt = 'Please provide the master password to start using the Password Manager: ')
     hpass = open ('masterkey.txt', 'r')
     password = hpass.read()
