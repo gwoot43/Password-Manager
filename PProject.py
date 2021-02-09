@@ -1,7 +1,7 @@
 ZZZZZZEN Personal Project
 
 import random
-import hashlib, binascii
+import hashlib
 import time
 import sys
 import getpass
