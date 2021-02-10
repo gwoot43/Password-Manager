@@ -7,7 +7,8 @@ import sys
 import getpass
 import os
 import smtplib
-from cryptography.fernet import Fernet 
+from cryptography.fernet import Fernet
+import webbrowser
 
 fkey = open ('file_key.txt', 'rb')
 key = fkey.read()
@@ -118,7 +119,7 @@ def decrypt (filename, key) :
         file.write (decrypted_f)
 
 def menu () :
-    choice = (input ('\nWelcome to your very own Password Manager! Please select from one of the options below: \n 1. Generate and Store Password \n 2. Search for Password \n 3. Delete Account Data \n 4. Show list of all Accounts \n 5. Encrypt/Decrypt \n 6. Exit \n' ))
+    choice = (input ('\nWelcome to your very own Password Manager! Please select from one of the options below: \n 1. Generate and Store Password \n 2. Search for Password \n 3. Delete Account Data \n 4. Show list of all Accounts \n 5. Encrypt/Decrypt \n 6. Has my password been pwned? \n 7. Exit \n' ))
     if choice == '1' :
        generatepassword ()
     elif choice == '2' :
@@ -142,8 +143,11 @@ def menu () :
             print ('Invalid output. Input must be either 1 or 2!')  
             menu ()
     elif choice == '6' :
+        webbrowser.open('https://haveibeenpwned.com/Passwords')
+        menu ()
+    elif choice == '7' :
         encrypt ('Password.txt', key) 
-        exit ()      
+        exit ()    
     else:
         print ('Invalid input. Please input a number between 1-5')
         menu()
