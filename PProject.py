@@ -79,6 +79,7 @@ def retrieve_password () :
         menu ()
         
 def generatepassword () :
+    webbrowser.open('https://haveibeenpwned.com/Passwords')
     website = str(input('Website/Application: '))
     username = str(input('Your username: '))
     length = int(input('How long would you like your password to be? (Minimum 12 characters: '))
@@ -119,7 +120,7 @@ def decrypt (filename, key) :
         file.write (decrypted_f)
 
 def menu () :
-    choice = (input ('\nWelcome to your very own Password Manager! Please select from one of the options below: \n 1. Generate and Store Password \n 2. Search for Password \n 3. Delete Account Data \n 4. Show list of all Accounts \n 5. Encrypt/Decrypt \n 6. Has my password been pwned? \n 7. Exit \n' ))
+    choice = (input ('\nWelcome to your very own Password Manager! Please select from one of the options below: \n 1. Generate and Store Password \n 2. Search for Password \n 3. Delete Account Data \n 4. Show list of all Accounts \n 5. Encrypt/Decrypt \n 6. Exit \n' ))
     if choice == '1' :
        generatepassword ()
     elif choice == '2' :
@@ -143,9 +144,6 @@ def menu () :
             print ('Invalid output. Input must be either 1 or 2!')  
             menu ()
     elif choice == '6' :
-        webbrowser.open('https://haveibeenpwned.com/Passwords')
-        menu ()
-    elif choice == '7' :
         encrypt ('Password.txt', key) 
         exit ()    
     else:
