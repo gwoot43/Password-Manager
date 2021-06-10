@@ -1,0 +1,12 @@
+
+Changes
+1.	Create an environmental variable to store the password and hash it using bcrypt
+Environment variables useful when you want to avoid hard-coding access credentials or passwords. To access, type in ‘system’ in search bar --> advanced system settings --> environmental variables to create a new variable. After creating, restart the computer to access the newly created variable. Bcrypt is the preferred method because it includes salt in the hashing algorithm and its adaptive hash function can determine how slow the hash function will be, making it resistant to bruteforce attacks and rainbow attacks
+	1a. Encryption/Decryption key and email has also been added as an environmental variable 
+2.	Separate the generate () function and the store function ()
+Sometimes you might just want to generate a new password without wanting to store the function. Instead of completely separating into two function, use and if/else statement to either save or exit to menu. 
+3.	Incorporated ‘HaveIBeenPwned’ as a separate menu option instead of including it with the generate() function
+Seemed very repetitive for the link to open every time you generate a new password but I still wanted it included because you want to make sure the newly generated password wasn’t involved in a previous breach 
+4.	Store the password and account info using MySQL
+5.	Add in an update function to update passwords and usernames 
+
