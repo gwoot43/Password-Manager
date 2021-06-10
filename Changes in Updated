@@ -8,6 +8,7 @@ Sometimes you might just want to generate a new password without wanting to stor
 3.	Incorporated ‘HaveIBeenPwned’ as a separate menu option instead of including it with the generate() function
 Seemed very repetitive for the link to open every time you generate a new password but I still wanted it included because you want to make sure the newly generated password wasn’t involved in a previous breach 
 4.	Store the password and account info using MySQL
+Recently learned some SQL and wanted to save information in an SQL db rather than a txt file
 5.	Add in an update function to update passwords and usernames 
 6.	Delete account updated to reflect SQL db
 7. 	No longer uses any form of symmetric encryption for password encryption 
