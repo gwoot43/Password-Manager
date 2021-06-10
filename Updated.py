@@ -1,10 +1,8 @@
 import random
-import hashlib
 import time
 import getpass
 import os
 import smtplib
-from cryptography.fernet import Fernet 
 import webbrowser
 import bcrypt
 import mysql.connector
@@ -15,12 +13,10 @@ db = mysql.connector.connect(
     passwd = os.environ.get('SQL_p'),
     database = 'passwordmanager')
 
-key = os.environ.get('Key')
 hashvar = bytes(os.environ.get('word.dll'), 'utf-8')
 salt = bcrypt.gensalt()
 hashed = bcrypt.hashpw(hashvar, salt).decode()
 #gets rid of b'
-cipher = Fernet(key)
 characters = 'abcdefghijkmnopqrstuvwyzABCDEFGHJKLMNPQRSTUVWYZ123456790@#$%&'
 email = os.environ.get('email')
 #to enable OTP, must allow less secure apps https://myaccount.google.com/lesssecureapps
@@ -127,22 +123,6 @@ def generatepassword () :
     else:
         print('Invalid input! \nPassword must be atleast 12 characters long!')
 
-
-def encrypt (filename, key) :
-    #Given a filename (str) and key (bytes), encrypt file and write it 
-    with open('Password.txt', 'rb') as file:
-        f = file.read()
-        encrypted_f = cipher.encrypt(f)
-    with open ('Password.txt', 'wb') as file: 
-        file.write(encrypted_f)
-
-def decrypt (filename, key) :
-    with open('Password.txt', 'rb') as file:
-        encrypted_f = file.read()
-        decrypted_f = cipher.decrypt(encrypted_f)
-    with open ('Password.txt', 'wb') as file:
-        file.write (decrypted_f)
-
 def menu () :
     choice = (input ('\nWelcome to your very own Password Manager! Please select from one of the options below: \n 1. Generate and Store Password \n 2. Search for Password \n 3. Delete Account Data \n 4. Show list of all Accounts \n 5. Update Password/Username \n 6. Has my password been pwned? \n 7. Exit \n' ))
     if choice == '1' :
@@ -160,7 +140,6 @@ def menu () :
         webbrowser.open('https://haveibeenpwned.com/Passwords')
         menu ()
     elif choice == '7' :
-        encrypt ('Password.txt', key) 
         exit ()    
     else:
         print ('Invalid input. Please input a number between 1-5')
