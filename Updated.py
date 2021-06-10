@@ -26,28 +26,23 @@ email = os.environ.get('email')
 #to enable OTP, must allow less secure apps https://myaccount.google.com/lesssecureapps
 
 def show_accounts () :
-    handle = open ('Password.txt', 'r')
-    print ('Fetching account data:')
-    for line in handle : 
-        account = line.split(':')[0]
-        print (account)
+    print ("Presented in the format 'Website', 'Username'")
+    mycursor = db.cursor()
+    mycursor.execute('SELECT website, username FROM Accounts')
+    for x in mycursor:
+        print (x)
     menu () 
 
-def delete_account () : 
-    handle = open ('Password.txt','r')
-    erase = input ('Which account would you like delete: ')
-    new_data = []
-    str = erase
-    for line in handle :
-        if not line.startswith (erase):
-            new_data.append(line)
-    #adds all the lines that does not start with 'str' input        
-    handle.close ()
-    handle = open ('Password.txt', 'w')
-    handle.writelines(new_data)
-    handle.close()
-    time.sleep(1)
-    print('Please wait while we delete your', str, 'account details')
+def delete_account () :
+    print ("Presented in the format 'Website', 'Username'")
+    mycursor = db.cursor()
+    mycursor.execute('SELECT website, username FROM Accounts')
+    for x in mycursor:
+        print (x)
+    website1 = input ('What is the name of the website of the account you wish to delete? ')
+    username1 = input ('What is the username of the account you wish to delete? ')
+    mycursor.execute('DELETE from Accounts where username = %s and website = %s', (username1, website1))
+    db.commit()
     menu ()
 
 def authenticate () :
